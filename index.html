@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MilkApp</title>
+
+    <link rel="stylesheet" href="/src/css/style.css" />
+  </head>
+  <body>
+    <nav class="navigation">
+      <button id="home-con-button" class="active">Početna</button>
+      <button id="new-users-con-button" >Novi korisnik</button>
+      <button id="users-con-button" >Lista korisnika</button>
+      <button id="report-con-button" >Izvještaji</button>
+    </nav>
+
+    
+    <main id="home-page"> 
+<!-- home-page Content -->
+<section>
+
+<div>
+  <div class="home_message">
+    <h1>Dobro došli u MilkApp</h1>
+    <img class="milk_img" src="src/img/milk.jpg" alt="milk" />
+  </div>
+</div>
+</div>
+    </main> 
+  
+    <main id="new-user-page" class="display_none">
+      <!-- new-user-page Content -->
+      <div class="left_container search_report_box">
+        <h1>Uputstvo za unos podataka</h1>
+        <h3>Mjesec:</h3>
+        <p>Potrebno je da upišete broj mjeseca od 1 do 12.</p>
+        <h3>Region:</h3>
+        <p>
+          Potrebno je da upišete broj regiona na kojoj se teritoriji proizvodi
+          mlijeko:
+        </p>
+        <p>1.Prijedor</p>
+        <p>2.Banja Luka</p>
+        <p>3.Gradiška</p>
+        <p>4.Doboj</p>
+        <p>5.Bijeljina</p>
+        <p>6.Sokolac</p>
+        <p>7.Trebinje</p>
+      </div>
+      <div class="right_container new_user">
+        
+          <input id="name" type="text" placeholder="Naziv" />
+          <p id="errorMessageName" class="error_mesage hidden">
+            This filed can't be empty
+          </p>
+          <input id="milkAmount" type="number" placeholder="Količine Mlijeka" />
+          <p id="errorMessageMilkAmount" class="error_mesage hidden">
+            This filed can't be empty
+          </p>
+          <input id="cowNumber" type="number" placeholder="Broj grla" />
+          <p id="errorMessageCowNumber" class="error_mesage hidden">
+            This filed can't be empty
+          </p>  
+                
+           <input id="month" type="number" placeholder="Mjesec" />
+          <p id="errorMessageMonth" class="error_mesage hidden">
+            This filed can't be empty
+          </p>
+          <input id="region" type="number" placeholder="Opština" />
+          <p id="errorMessageRegion" class="error_mesage hidden">
+            This filed can't be empty
+          </p>
+          <br />
+          <button class="send_button " id="sendFarmerInfoButton" disabled>
+            Pošalji
+          </button>
+        </div>
+        
+      </div>
+    
+    
+    
+    </div>
+  </main>
+
+  <main id="user-lists-page" class="display_none">
+    <!-- user-lists-page Content -->
+    <div class="left_container">
+      <div class="search_report_box">
+        <h1 class="search_users">Search:</h1>
+        <input
+         
+          type="text"
+          id="searchAllUsers"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+   
+    <div class="right_container">
+      <div id="users-container" class="users_container">
+        <div class="users_lists">
+          <div class="user_list header">
+            <p>Ime i prezime/Naziv</p>
+            <p>Količine Mlijeka</p>
+            <p>Broj grla</p>
+            <p>Mjesec</p>
+            <p>Region</p>
+          </div>
+          <div id="users-table">
+            
+          </div>
+        </div>
+        <div id="show-user-info"></div>
+      </div>
+</main>
+
+<main id="report-page" class="display_none">
+  <!-- "report-page Content -->
+  <div class="left_container">
+    <div class="search_report_box">
+      <select  id="region-list-value" name="region">
+        <option value="Sve regije">Sve regije</option>
+        <option value="Prijedor">Prijedor</option>
+        <option value="Banja Luka">Banja Luka</option>
+        <option value="Gradiška">Gradiška</option>
+        <option value="Doboj">Doboj</option>
+        <option value="Bijeljina">Bijeljina</option>
+        <option value="Sokolac">Sokolac</option>
+        <option value="Trebinje">Trebinje</option>
+    </select>
+    <select  id="month-list-value" name="region">
+      <option value="Svi mjeseci">Svi mjeseci</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+  </select>
+      <br>
+      <button id="report-button" class="report_button">Submit</button>
+    </div>
+  </div>
+  <div class="right_container">
+   
+    <div class="search_report_box">
+      <h1>Količine Mlijeka:<h3 id="reportAmountOfMilk"></h3></h1>        
+    </div>
+    <div class="search_report_box">
+      <h1>Broj grla:<h3 id="reportAmountOfCows"></h3></h1>        
+    </div>
+    </div>
+</main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

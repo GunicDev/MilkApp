@@ -1,0 +1,198 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  background-color: rgb(196, 248, 248);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/*GLOBAL STYLE*/
+
+.left_container {
+  padding: 1rem;
+  float: left;
+  margin-left: 3rem;
+  width: 20%;
+  color: black;
+  font-size: large;
+}
+
+.right_container {
+  color: black;
+  float: right;
+  width: 70%;
+  margin-right: 3rem;
+}
+
+.new_user {
+  width: 500px;
+  margin: 5rem 30% 0 0;
+}
+
+/*INPUT STYLE*/
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fafafa;
+  border: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: 0.3s box-shadow;
+}
+
+.input:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/*BUTTONS*/
+.send_button {
+  background-color: rgb(15, 145, 15);
+  color: white;
+  width: 100%;
+  height: 50px;
+  margin: 0.5rem;
+  font-weight: 700;
+}
+.send_button :active {
+  background-color: rgb(15, 145, 15);
+  color: white;
+  width: 100%;
+  height: 50px;
+  margin: 0.5rem;
+  font-weight: 700;
+}
+
+.report_button {
+  background-color: rgb(15, 145, 15);
+  color: white;
+  width: 100%;
+  height: 50px;
+  margin: 0.5rem;
+  font-weight: 700;
+}
+
+:disabled {
+  background-color: lightgreen;
+}
+
+select {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fafafa;
+  border: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: 0.3s box-shadow;
+}
+
+/*HOME PAGE*/
+.home_message {
+  text-align: center;
+  color: rgba(11, 11, 231, 0.808);
+}
+.milk_img {
+  margin: 1rem;
+  width: 750px;
+  height: 550px;
+  border-radius: 15px;
+}
+
+/* SEND FARMER INFO*/
+
+.farmer_info_card {
+  font-size: larger;
+  text-align: center;
+}
+
+/*ALL USERS*/
+
+.search_report_box {
+  margin-top: 2rem;
+  padding: 2rem;
+  color: black;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 2rem;
+}
+
+/*REPORTS*/
+
+.error_input {
+  border: 5px solid red;
+}
+
+.error_mesage {
+  color: red;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.display_none {
+  display: none;
+}
+/*NAVIGATION BAR*/
+.navigation {
+  padding-inline: 1rem;
+  font-size: large;
+  margin: 0;
+  margin-bottom: 1 rem;
+  background: #033c46;
+  border-bottom: 1px solid black;
+}
+
+.navigation button {
+  font-family: 'Courier New', Courier, monospace;
+  background: none;
+  color: whitesmoke;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.navigation button:active {
+  background: #49464a;
+}
+
+.navigation button.active {
+  background: whitesmoke;
+  color: #2c2d2f;
+}
+
+/*TABLE*/
+.users_container {
+  padding: 1rem;
+}
+
+.users_lists {
+  max-width: 80rem;
+}
+
+.user_list {
+  display: flex;
+  cursor: pointer;
+}
+
+.user_list.header {
+  background: #033c46;
+  color: whitesmoke;
+}
+
+.user_list p {
+  margin: 0;
+  padding: 1rem 1rem;
+  width: 20%;
+}
+
+.users_card {
+  border: 1px solid #2e2c2f;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 68rem;
+}
