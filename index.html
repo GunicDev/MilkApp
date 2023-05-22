@@ -49,8 +49,8 @@
         <p>6.Sokolac</p>
         <p>7.Trebinje</p>
       </div>
-      <div class="right_container new_user">
-        
+      <div class="right_container new_user search_report_box">
+        <h3>Pojedinačan unos:</h3>
           <input id="name" type="text" placeholder="Naziv" />
           <p id="errorMessageName" class="error_mesage hidden">
             This filed can't be empty
@@ -73,13 +73,18 @@
             This filed can't be empty
           </p>
           <br />
-          <button class="send_button " id="sendFarmerInfoButton" disabled>
+          <button class="send_button" id="sendFarmerInfoButton" disabled>
             Pošalji
-          </button>
+          </button> 
         </div>
+       
         
       </div>
-    
+      <div class="right_container new_user search_report_box">
+        <h3>Odaberite Exel Tabelu:</h3>
+        <input class="chose_file" type="file">
+        <button class="send_button" >Import table</button>
+                </div>
     
     
     </div>
@@ -152,12 +157,19 @@
   </div>
   <div class="right_container">
    
-    <div class="search_report_box">
-      <h1>Količine Mlijeka:<h3 id="reportAmountOfMilk"></h3></h1>        
+    <div class="report_box_left">
+      <h2>Količine mlijeka:  &ensp;</h2>  
+      <h2 id="report-amount-of-milk"></h2>      
     </div>
-    <div class="search_report_box">
-      <h1>Broj grla:<h3 id="reportAmountOfCows"></h3></h1>        
+    <div class="report_box_right">
+      <h2>Broj grla: &ensp;</h2>  
+      <h2 id="report-amount-of-cows"></h2>      
     </div>
+    <div class="report_box_right">
+      <h2>Broj korisnika: &ensp;</h2>    
+      <h2 id="report-amount-of-users"></h2>     
+    </div>
+
     </div>
 </main>
 

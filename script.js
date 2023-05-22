@@ -1,42 +1,47 @@
 // GLOBAL VARIALE
-const sendFarmerInfoButton = document.getElementById('sendFarmerInfoButton');
-const newUserName = document.getElementById('name');
-const newUserMilkAmount = document.getElementById('milkAmount');
-const newUserCowNumber = document.getElementById('cowNumber');
-const newUserMonth = document.getElementById('month');
-const newUserRegion = document.getElementById('region');
-const userTable = document.getElementById('users-table');
-const reportAnalizeButton = document.getElementById('report-button');
+const sendFarmerInfoButton = document.getElementById("sendFarmerInfoButton");
+const newUserName = document.getElementById("name");
+const newUserMilkAmount = document.getElementById("milkAmount");
+const newUserCowNumber = document.getElementById("cowNumber");
+const newUserMonth = document.getElementById("month");
+const newUserRegion = document.getElementById("region");
+const userTable = document.getElementById("users-table");
+const reportAnalizeButton = document.getElementById("report-button");
 // ERROR MESSAGE VARIALE
-const errorMessageName = document.getElementById('errorMessageName');
+const errorMessageName = document.getElementById("errorMessageName");
 const errorMessageMilkAmount = document.getElementById(
-  'errorMessageMilkAmount'
+  "errorMessageMilkAmount"
 );
-const errorMessageCowNumber = document.getElementById('errorMessageCowNumber');
-const errorMessageMonth = document.getElementById('errorMessageMonth');
-const errorMessageRegion = document.getElementById('errorMessageRegion');
+const errorMessageCowNumber = document.getElementById("errorMessageCowNumber");
+const errorMessageMonth = document.getElementById("errorMessageMonth");
+const errorMessageRegion = document.getElementById("errorMessageRegion");
 // NAV BAR
-const homePageButton = document.getElementById('home-con-button');
-const newUsersButton = document.getElementById('new-users-con-button');
-const liseOfAllUsersButton = document.getElementById('users-con-button');
-const reportButton = document.getElementById('report-con-button');
+const homePageButton = document.getElementById("home-con-button");
+const newUsersButton = document.getElementById("new-users-con-button");
+const liseOfAllUsersButton = document.getElementById("users-con-button");
+const reportButton = document.getElementById("report-con-button");
 
 // MAIN IDS
 
-const homePage = document.getElementById('home-page');
-const newUsersPage = document.getElementById('new-user-page');
-const listOfAllUsersPage = document.getElementById('user-lists-page');
-const reportPage = document.getElementById('report-page');
+const homePage = document.getElementById("home-page");
+const newUsersPage = document.getElementById("new-user-page");
+const listOfAllUsersPage = document.getElementById("user-lists-page");
+const reportPage = document.getElementById("report-page");
+
+//REPORT
+const numberOfUsers = document.getElementById("report-amount-of-users");
+const numberOfCows = document.getElementById("report-amount-of-cows");
+const reportAmountOfMilk = document.getElementById("report-amount-of-milk");
 
 //GLOAL ARRAY
 const milkProduction = [
   {
-    id: '',
-    names: '',
-    allMilkAmount: '',
-    cowNumbers: '',
-    months: '',
-    regions: '',
+    id: "",
+    names: "",
+    allMilkAmount: "",
+    cowNumbers: "",
+    months: "",
+    regions: "",
   },
 ];
 
@@ -46,55 +51,57 @@ const milkProduction = [
 
 homePageButton.onclick = function () {
   //console.log(homePageButton);
-  homePageButton.classList.add('active');
-  newUsersButton.classList.remove('active');
-  liseOfAllUsersButton.classList.remove('active');
-  reportButton.classList.remove('active');
+  homePageButton.classList.add("active");
+  newUsersButton.classList.remove("active");
+  liseOfAllUsersButton.classList.remove("active");
+  reportButton.classList.remove("active");
 
-  homePage.classList.remove('display_none');
-  newUsersPage.classList.add('display_none');
-  listOfAllUsersPage.classList.add('display_none');
-  reportPage.classList.add('display_none');
+  homePage.classList.remove("display_none");
+  newUsersPage.classList.add("display_none");
+  listOfAllUsersPage.classList.add("display_none");
+  reportPage.classList.add("display_none");
 };
 
 newUsersButton.onclick = function () {
   //console.log(homePageButton);
-  homePageButton.classList.remove('active');
-  newUsersButton.classList.add('active');
-  liseOfAllUsersButton.classList.remove('active');
-  reportButton.classList.remove('active');
+  homePageButton.classList.remove("active");
+  newUsersButton.classList.add("active");
+  liseOfAllUsersButton.classList.remove("active");
+  reportButton.classList.remove("active");
 
-  homePage.classList.add('display_none');
-  newUsersPage.classList.remove('display_none');
-  listOfAllUsersPage.classList.add('display_none');
-  reportPage.classList.add('display_none');
+  homePage.classList.add("display_none");
+  newUsersPage.classList.remove("display_none");
+  listOfAllUsersPage.classList.add("display_none");
+  reportPage.classList.add("display_none");
 };
 liseOfAllUsersButton.onclick = function () {
-  homePageButton.classList.remove('active');
-  newUsersButton.classList.remove('active');
-  liseOfAllUsersButton.classList.add('active');
-  reportButton.classList.remove('active');
+  homePageButton.classList.remove("active");
+  newUsersButton.classList.remove("active");
+  liseOfAllUsersButton.classList.add("active");
+  reportButton.classList.remove("active");
 
-  homePage.classList.add('display_none');
-  newUsersPage.classList.add('display_none');
-  listOfAllUsersPage.classList.remove('display_none');
-  reportPage.classList.add('display_none');
+  homePage.classList.add("display_none");
+  newUsersPage.classList.add("display_none");
+  listOfAllUsersPage.classList.remove("display_none");
+  reportPage.classList.add("display_none");
 };
 
 reportButton.onclick = function () {
-  homePageButton.classList.remove('active');
-  newUsersButton.classList.remove('active');
-  liseOfAllUsersButton.classList.remove('active');
-  reportButton.classList.add('active');
+  amountOfMilk();
+  amountOfUsers();
+  homePageButton.classList.remove("active");
+  newUsersButton.classList.remove("active");
+  liseOfAllUsersButton.classList.remove("active");
+  reportButton.classList.add("active");
 
-  homePage.classList.add('display_none');
-  newUsersPage.classList.add('display_none');
-  listOfAllUsersPage.classList.add('display_none');
-  reportPage.classList.remove('display_none');
+  homePage.classList.add("display_none");
+  newUsersPage.classList.add("display_none");
+  listOfAllUsersPage.classList.add("display_none");
+  reportPage.classList.remove("display_none");
 };
 const renderUsers = function () {
-  userTable.innerHTML = '';
-  milkProduction.forEach(user => {
+  userTable.innerHTML = "";
+  milkProduction.forEach((user) => {
     userTable.innerHTML += `
     <div class="user_list">
               <p>${user.names}</p>
@@ -110,13 +117,13 @@ const renderUsers = function () {
 
 const addUser = function () {
   const regionList = [
-    'Prijedor',
-    'Banja Luka',
-    'Gradiška',
-    'Doboj',
-    'Bijeljina',
-    'Sokolac',
-    'Trebinje',
+    "Prijedor",
+    "Banja Luka",
+    "Gradiška",
+    "Doboj",
+    "Bijeljina",
+    "Sokolac",
+    "Trebinje",
   ];
   const userId = Math.floor(Math.random() * 10000000000);
   const name = newUserName.value;
@@ -134,12 +141,12 @@ const addUser = function () {
     regions: regionList[userRegion],
   };
   milkProduction.push(userInfo);
-  newUserName.value = '';
-  newUserMilkAmount.value = '';
-  newUserCowNumber.value = '';
-  newUserMonth.value = '';
-  newUserRegion.value = '';
-  renderUsers(milkProduction);
+  newUserName.value = "";
+  newUserMilkAmount.value = "";
+  newUserCowNumber.value = "";
+  newUserMonth.value = "";
+  newUserRegion.value = "";
+  renderUsers();
 };
 const checkValidPost = function () {
   const name = newUserName.value;
@@ -170,12 +177,12 @@ sendFarmerInfoButton.onclick = function () {
 newUserName.oninput = function () {
   const name = newUserName.value;
   if (name.length <= 0) {
-    newUserName.classList.add('error_input');
-    errorMessageName.classList.remove('hidden');
+    newUserName.classList.add("error_input");
+    errorMessageName.classList.remove("hidden");
     name.disable = true;
   } else {
-    newUserName.classList.remove('error_input');
-    errorMessageName.classList.add('hidden');
+    newUserName.classList.remove("error_input");
+    errorMessageName.classList.add("hidden");
     name.disable = false;
   }
   checkValidPost();
@@ -183,22 +190,22 @@ newUserName.oninput = function () {
 newUserMilkAmount.oninput = function () {
   const milkAmount = newUserMilkAmount.value;
   if (milkAmount.length <= 0) {
-    newUserMilkAmount.classList.add('error_input');
-    errorMessageMilkAmount.classList.remove('hidden');
+    newUserMilkAmount.classList.add("error_input");
+    errorMessageMilkAmount.classList.remove("hidden");
   } else {
-    newUserMilkAmount.classList.remove('error_input');
-    errorMessageMilkAmount.classList.add('hidden');
+    newUserMilkAmount.classList.remove("error_input");
+    errorMessageMilkAmount.classList.add("hidden");
   }
   checkValidPost();
 };
 newUserCowNumber.oninput = function () {
   const cowNumber = newUserCowNumber.value;
   if (cowNumber.length <= 0) {
-    newUserCowNumber.classList.add('error_input');
-    errorMessageCowNumber.classList.remove('hidden');
+    newUserCowNumber.classList.add("error_input");
+    errorMessageCowNumber.classList.remove("hidden");
   } else {
-    newUserCowNumber.classList.remove('error_input');
-    errorMessageCowNumber.classList.add('hidden');
+    newUserCowNumber.classList.remove("error_input");
+    errorMessageCowNumber.classList.add("hidden");
   }
   checkValidPost();
 };
@@ -210,11 +217,11 @@ newUserMonth.oninput = function () {
     Number(monthWithMilk) > 12 ||
     Number(monthWithMilk) == 0
   ) {
-    newUserMonth.classList.add('error_input');
-    errorMessageMonth.classList.remove('hidden');
+    newUserMonth.classList.add("error_input");
+    errorMessageMonth.classList.remove("hidden");
   } else {
-    newUserMonth.classList.remove('error_input');
-    errorMessageMonth.classList.add('hidden');
+    newUserMonth.classList.remove("error_input");
+    errorMessageMonth.classList.add("hidden");
   }
   checkValidPost();
 };
@@ -225,11 +232,11 @@ newUserRegion.oninput = function () {
     Number(userRegion) > 7 ||
     Number(userRegion) == 0
   ) {
-    newUserRegion.classList.add('error_input');
-    errorMessageRegion.classList.remove('hidden');
+    newUserRegion.classList.add("error_input");
+    errorMessageRegion.classList.remove("hidden");
   } else {
-    newUserRegion.classList.remove('error_input');
-    errorMessageRegion.classList.add('hidden');
+    newUserRegion.classList.remove("error_input");
+    errorMessageRegion.classList.add("hidden");
   }
 
   checkValidPost();
@@ -238,7 +245,25 @@ newUserRegion.oninput = function () {
 //REPORT VALUES
 
 reportAnalizeButton.onclick = function () {
-  const chosenRegionListValues = document.getElementById('region-list-value');
-  const monthListValues = document.getElementById('month-list-value');
+  const chosenRegionListValues = document.getElementById("region-list-value");
+  const monthListValues = document.getElementById("month-list-value");
   console.log(chosenRegionListValues.value, monthListValues.value);
+};
+
+const amountOfMilk = function () {
+  let sumAmountOfMilk = 0;
+  milkProduction.forEach((amount) => {
+    sumAmountOfMilk += Number(amount.allMilkAmount);
+  });
+  console.log(sumAmountOfMilk);
+  reportAmountOfMilk.innerHTML = sumAmountOfMilk;
+};
+
+const amountOfUsers = function () {
+  let sumAmountOfUsers = 0;
+  milkProduction.forEach((value, index) => {
+    sumAmountOfUsers = index;
+  });
+  console.log(sumAmountOfUsers);
+  numberOfUsers.innerHTML = sumAmountOfUsers;
 };
