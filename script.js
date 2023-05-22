@@ -89,6 +89,7 @@ liseOfAllUsersButton.onclick = function () {
 reportButton.onclick = function () {
   amountOfMilk();
   amountOfUsers();
+  amoutOfCows();
   homePageButton.classList.remove("active");
   newUsersButton.classList.remove("active");
   liseOfAllUsersButton.classList.remove("active");
@@ -101,7 +102,7 @@ reportButton.onclick = function () {
 };
 const renderUsers = function () {
   userTable.innerHTML = "";
-  milkProduction.forEach((user) => {
+  milkProduction.slice(1).forEach((user) => {
     userTable.innerHTML += `
     <div class="user_list">
               <p>${user.names}</p>
@@ -148,12 +149,14 @@ const addUser = function () {
   newUserRegion.value = "";
   renderUsers();
 };
+
 const checkValidPost = function () {
   const name = newUserName.value;
   const milkAmount = newUserMilkAmount.value;
   const cowNumber = newUserCowNumber.value;
   const monthWithMilk = newUserMonth.value;
   const userRegion = newUserRegion.value;
+
   if (
     name.length > 0 &&
     milkAmount.length > 0 &&
@@ -169,9 +172,26 @@ const checkValidPost = function () {
 
 sendFarmerInfoButton.onclick = function () {
   addUser();
-
   //console.log(milkProduction);
   sendFarmerInfoButton.disabled = true;
+};
+
+newUserRegion.oninput = function () {
+  const userRegion = newUserRegion.value;
+  if (
+    userRegion.length <= 0 ||
+    Number(userRegion) > 7 ||
+    Number(userRegion) == 0
+  ) {
+    newUserRegion.classList.add("error_input");
+    errorMessageRegion.classList.remove("hidden");
+    return (sendFarmerInfoButton.disabled = true);
+  } else {
+    newUserRegion.classList.remove("error_input");
+    errorMessageRegion.classList.add("hidden");
+  }
+
+  checkValidPost();
 };
 
 newUserName.oninput = function () {
@@ -179,11 +199,9 @@ newUserName.oninput = function () {
   if (name.length <= 0) {
     newUserName.classList.add("error_input");
     errorMessageName.classList.remove("hidden");
-    name.disable = true;
   } else {
     newUserName.classList.remove("error_input");
     errorMessageName.classList.add("hidden");
-    name.disable = false;
   }
   checkValidPost();
 };
@@ -219,26 +237,11 @@ newUserMonth.oninput = function () {
   ) {
     newUserMonth.classList.add("error_input");
     errorMessageMonth.classList.remove("hidden");
+    return (sendFarmerInfoButton.disabled = true);
   } else {
     newUserMonth.classList.remove("error_input");
     errorMessageMonth.classList.add("hidden");
   }
-  checkValidPost();
-};
-newUserRegion.oninput = function () {
-  const userRegion = newUserRegion.value;
-  if (
-    userRegion.length <= 0 ||
-    Number(userRegion) > 7 ||
-    Number(userRegion) == 0
-  ) {
-    newUserRegion.classList.add("error_input");
-    errorMessageRegion.classList.remove("hidden");
-  } else {
-    newUserRegion.classList.remove("error_input");
-    errorMessageRegion.classList.add("hidden");
-  }
-
   checkValidPost();
 };
 
@@ -249,13 +252,13 @@ reportAnalizeButton.onclick = function () {
   const monthListValues = document.getElementById("month-list-value");
   console.log(chosenRegionListValues.value, monthListValues.value);
 };
-
+//REPORT CALCULATIONS
 const amountOfMilk = function () {
   let sumAmountOfMilk = 0;
   milkProduction.forEach((amount) => {
     sumAmountOfMilk += Number(amount.allMilkAmount);
   });
-  console.log(sumAmountOfMilk);
+  //console.log(sumAmountOfMilk);
   reportAmountOfMilk.innerHTML = sumAmountOfMilk;
 };
 
@@ -264,6 +267,83 @@ const amountOfUsers = function () {
   milkProduction.forEach((value, index) => {
     sumAmountOfUsers = index;
   });
-  console.log(sumAmountOfUsers);
+  //console.log(sumAmountOfUsers);
   numberOfUsers.innerHTML = sumAmountOfUsers;
 };
+
+const amoutOfCows = function () {
+  let sumOfAllCows = 0;
+  milkProduction.forEach((amount) => {
+    sumOfAllCows += Number(amount.cowNumbers);
+  });
+  console.log(sumOfAllCows);
+  numberOfCows.innerHTML += sumOfAllCows;
+};
+
+//UPLOAD EXEL DOCUMENT TO JSON
+// Method to upload a valid excel file
+function upload() {
+  let files = document.getElementById("file_upload").files;
+  if (files.length == 0) {
+    alert("Please choose any file...");
+    return;
+  }
+  let filename = files[0].name;
+  let extension = filename.substring(filename.lastIndexOf(".")).toUpperCase();
+  if (extension == ".XLS" || extension == ".XLSX") {
+    excelFileToJSON(files[0]);
+  } else {
+    alert("Please select a valid excel file.");
+  }
+}
+
+//Method to read excel file and convert it into JSON
+function excelFileToJSON(file) {
+  try {
+    let reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = function (e) {
+      let data = e.target.result;
+      let workbook = XLSX.read(data, {
+        type: "binary",
+      });
+      let result = {};
+      workbook.SheetNames.forEach(function (sheetName) {
+        let roa = XLSX.utils.sheet_to_row_object_array(
+          workbook.Sheets[sheetName]
+        );
+        if (roa.length > 0) {
+          result[sheetName] = roa;
+        }
+      });
+      //displaying the json result
+      //console.log(result.Sheet1);
+      result.Sheet1.forEach((value) => {
+        milkProduction.push(value);
+      });
+      const regionList = [
+        "Prijedor",
+        "Banja Luka",
+        "Gradiška",
+        "Doboj",
+        "Bijeljina",
+        "Sokolac",
+        "Trebinje",
+      ];
+      milkProduction.slice(1).forEach((values) => {
+        values.regions = regionList[Number(values.regions) - 1];
+        //console.log(regionList[values.regions]);
+      });
+      document.getElementById("file_upload").value = "";
+
+      renderUsers();
+
+      /*
+      var resultEle = document.getElementById("json-result");
+      resultEle.value = JSON.stringify(result, null, 4);
+      resultEle.style.display = "block";*/
+    };
+  } catch (e) {
+    console.error(e);
+  }
+}

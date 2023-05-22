@@ -7,6 +7,7 @@
     <title>MilkApp</title>
 
     <link rel="stylesheet" href="/src/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
   </head>
   <body>
     <nav class="navigation">
@@ -82,10 +83,10 @@
       </div>
       <div class="right_container new_user search_report_box">
         <h3>Odaberite Exel Tabelu:</h3>
-        <input class="chose_file" type="file">
-        <button class="send_button" >Import table</button>
+        <input id="file_upload" class="chose_file" type="file">
+        <button onclick="upload()" class="send_button" >Import table</button>
                 </div>
-    
+                
     
     </div>
   </main>
