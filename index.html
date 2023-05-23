@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
   </head>
   <body>
-    <nav class="navigation">
+    <nav id="navigationBar" class="navigation">
       <button id="home-con-button" class="active">Početna</button>
       <button id="new-users-con-button" >Novi korisnik</button>
       <button id="users-con-button" >Lista korisnika</button>
@@ -90,10 +90,17 @@
     
     </div>
   </main>
-
+  
   <main id="user-lists-page" class="display_none">
     <!-- user-lists-page Content -->
-    <div class="left_container">
+    <div id="show-user-modal" class="display_none">             
+     
+      <div id="user-detail" class="user-detail"></div>
+   
+      <div ><button id="close-modal" class="close_modal_button" onclick="closeModal()">X</button></div>      
+    </div>
+
+    <div id="leftContainer" class="left_container">
       <div class="search_report_box">
         <h1 class="search_users">Search:</h1>
         <input
@@ -105,7 +112,7 @@
       </div>
     </div>
    
-    <div class="right_container">
+    <div id="rightContainer" class="right_container">
       <div id="users-container" class="users_container">
         <div class="users_lists">
           <div class="user_list header">

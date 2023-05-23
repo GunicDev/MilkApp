@@ -32,7 +32,16 @@ const reportPage = document.getElementById("report-page");
 const numberOfUsers = document.getElementById("report-amount-of-users");
 const numberOfCows = document.getElementById("report-amount-of-cows");
 const reportAmountOfMilk = document.getElementById("report-amount-of-milk");
+const showUserModal = document.getElementById("show-user-modal");
 
+//MODAL
+const leftContainer = document.getElementById("leftContainer");
+const rightContainer = document.getElementById("rightContainer");
+const navigationBar = document.getElementById("navigationBar");
+const showUserModalCard = document.getElementById("user-detail");
+
+//SEARCH
+const searchAllUsers = document.getElementById("searchAllUsers");
 //GLOAL ARRAY
 const milkProduction = [
   {
@@ -56,6 +65,7 @@ homePageButton.onclick = function () {
   liseOfAllUsersButton.classList.remove("active");
   reportButton.classList.remove("active");
 
+  showUserModal.classList.add("display_none");
   homePage.classList.remove("display_none");
   newUsersPage.classList.add("display_none");
   listOfAllUsersPage.classList.add("display_none");
@@ -69,6 +79,7 @@ newUsersButton.onclick = function () {
   liseOfAllUsersButton.classList.remove("active");
   reportButton.classList.remove("active");
 
+  showUserModal.classList.add("display_none");
   homePage.classList.add("display_none");
   newUsersPage.classList.remove("display_none");
   listOfAllUsersPage.classList.add("display_none");
@@ -80,6 +91,7 @@ liseOfAllUsersButton.onclick = function () {
   liseOfAllUsersButton.classList.add("active");
   reportButton.classList.remove("active");
 
+  showUserModal.classList.add("display_none");
   homePage.classList.add("display_none");
   newUsersPage.classList.add("display_none");
   listOfAllUsersPage.classList.remove("display_none");
@@ -95,16 +107,17 @@ reportButton.onclick = function () {
   liseOfAllUsersButton.classList.remove("active");
   reportButton.classList.add("active");
 
+  showUserModal.classList.add("display_none");
   homePage.classList.add("display_none");
   newUsersPage.classList.add("display_none");
   listOfAllUsersPage.classList.add("display_none");
   reportPage.classList.remove("display_none");
 };
-const renderUsers = function () {
+const renderUsers = function (milkProduction) {
   userTable.innerHTML = "";
   milkProduction.slice(1).forEach((user) => {
     userTable.innerHTML += `
-    <div class="user_list">
+    <div class="user_list" onclick="getUserInfo(${user.id})">
               <p>${user.names}</p>
               <p>${user.allMilkAmount}</p>
               <p>${user.cowNumbers}</p>
@@ -147,7 +160,7 @@ const addUser = function () {
   newUserCowNumber.value = "";
   newUserMonth.value = "";
   newUserRegion.value = "";
-  renderUsers();
+  renderUsers(milkProduction);
 };
 
 const checkValidPost = function () {
@@ -277,7 +290,7 @@ const amoutOfCows = function () {
     sumOfAllCows += Number(amount.cowNumbers);
   });
   console.log(sumOfAllCows);
-  numberOfCows.innerHTML += sumOfAllCows;
+  numberOfCows.innerHTML = sumOfAllCows;
 };
 
 //UPLOAD EXEL DOCUMENT TO JSON
@@ -336,7 +349,7 @@ function excelFileToJSON(file) {
       });
       document.getElementById("file_upload").value = "";
 
-      renderUsers();
+      renderUsers(milkProduction);
 
       /*
       var resultEle = document.getElementById("json-result");
@@ -347,3 +360,57 @@ function excelFileToJSON(file) {
     console.error(e);
   }
 }
+// serch iput
+searchAllUsers.oninput = () => {
+  let foundPosts = [];
+  for (let index = 0; index < milkProduction.length; index++) {
+    if (
+      milkProduction[index].names
+        .toLowerCase()
+        .includes(searchAllUsers.value.toLowerCase())
+    ) {
+      foundPosts.push(milkProduction[index]);
+    }
+  }
+
+  renderUsers(foundPosts);
+};
+
+// USER SHOW CARD
+
+const getUserInfo = function (userId) {
+  //console.log(userId);
+
+  for (let i = 0; i < milkProduction.length; i++) {
+    if (userId == milkProduction[i].id) {
+      showUserModalCard.innerHTML = `
+      
+      <div class="modal_user_info">
+      <h1>Ime i prezime:</h1>
+      <h1>${milkProduction[i].names}</h1>  
+      </div>  
+      <div class="modal_user_info">
+      <h1>Ukupne količine mlijeka:</h1>
+      <h1>${milkProduction[i].allMilkAmount} litara</h1>
+      </div>
+           
+    `;
+    }
+  }
+
+  //console.log(milkProduction);
+
+  showUserModal.classList.add("user_info_modal");
+  leftContainer.classList.add("display_none");
+  rightContainer.classList.add("display_none");
+  navigationBar.classList.add("display_none");
+};
+
+const closeModal = function () {
+  const closeModalButton = document.getElementById("close-modal");
+  console.log(closeModalButton);
+  showUserModal.classList.remove("user_info_modal");
+  leftContainer.classList.remove("display_none");
+  rightContainer.classList.remove("display_none");
+  navigationBar.classList.remove("display_none");
+};
