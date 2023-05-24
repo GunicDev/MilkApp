@@ -239,7 +239,7 @@ select {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+/*MODAL*/
 .modal_user_info {
   float: left;
   margin: 3rem;
@@ -254,4 +254,28 @@ select {
   width: 2rem;
   height: 2rem;
   float: right;
+}
+
+/*MEDIA*/
+@media screen and (max-width: 900px) {
+  body {
+    display: inline-block;
+  }
+  .left_container {
+    margin-left: 20%;
+    margin-right: 20%;
+    display: inline-block;
+  }
+  .right_container {
+    margin-left: 22%;
+    margin-right: 15%;
+    display: inline;
+  }
+  .search_report_box {
+    width: 400px;
+  }
+
+  .milk_img {
+    width: 80%;
+  }
 }

@@ -33,6 +33,9 @@ const numberOfUsers = document.getElementById("report-amount-of-users");
 const numberOfCows = document.getElementById("report-amount-of-cows");
 const reportAmountOfMilk = document.getElementById("report-amount-of-milk");
 const showUserModal = document.getElementById("show-user-modal");
+const averageMilkPerCowInMilkProduction = document.getElementById(
+  "report-amount-of-average-milk-per-cow"
+);
 
 //MODAL
 const leftContainer = document.getElementById("leftContainer");
@@ -98,10 +101,28 @@ liseOfAllUsersButton.onclick = function () {
   reportPage.classList.add("display_none");
 };
 
+//AVERAGE MILK PER COW
+
+const averageMilkPerCowInMonth = function () {
+  let sumAmountOfMilk = 0;
+  milkProduction.forEach((amount) => {
+    sumAmountOfMilk += Number(amount.allMilkAmount);
+  });
+  let sumOfCows = 0;
+  milkProduction.forEach((amount) => {
+    sumOfCows += Number(amount.cowNumbers);
+  });
+
+  let averageMilkProductionPerCow = Math.floor(sumAmountOfMilk / sumOfCows);
+
+  averageMilkPerCowInMilkProduction.innerHTML = averageMilkProductionPerCow;
+};
+
 reportButton.onclick = function () {
   amountOfMilk();
   amountOfUsers();
   amoutOfCows();
+  averageMilkPerCowInMonth();
   homePageButton.classList.remove("active");
   newUsersButton.classList.remove("active");
   liseOfAllUsersButton.classList.remove("active");
@@ -392,6 +413,7 @@ const getUserInfo = function (userId) {
       <div class="modal_user_info">
       <h1>Ukupne količine mlijeka:</h1>
       <h1>${milkProduction[i].allMilkAmount} litara</h1>
+
       </div>
            
     `;
